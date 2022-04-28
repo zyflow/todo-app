@@ -49,7 +49,6 @@ export const modalStyles = StyleSheet.create({
     padding: 5,
     margin: 5,
     // flex: 1,
-    backgroundColor: "red",
     alignItems: "flex-start"
   }
 });

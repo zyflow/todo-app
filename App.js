@@ -8,7 +8,7 @@ import {Coffee} from "./Components/Coffee";
 import {Beer} from "./Components/Beer";
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState('weekly');
+  const [currentScreen, setCurrentScreen] = useState('calendar');
   let content = <Coffee/>
 
   switch (currentScreen) {
@@ -28,11 +28,10 @@ function App() {
 
 
 
-  console.log('currenty', currentScreen)
   return (
       <View style={styles.mainBody}>
         {content}
-        <Footer setCurrentScreen={setCurrentScreen} />
+        <Footer currentScreen={currentScreen} setCurrentScreen={setCurrentScreen} />
       </View>
   );
 }

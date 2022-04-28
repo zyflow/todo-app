@@ -37,7 +37,7 @@ export const Beer = () => {
 
 
     const renderItem = ({ item }) => (
-        <ItemBlockWithImage title={item.name} image={item.image} rating={item.rating}  />
+        <ItemBlockWithImage title={item.name} image={item.image} rating={item.rating} edit={false}  />
     );
 
     const save = () => {
@@ -133,7 +133,6 @@ export const Beer = () => {
                 </View>
 
                 <FlatList
-                    style={styles.item}
                     data={beerList}
                     renderItem={renderItem}
                     keyExtractor={(item,index) => index.toString()}

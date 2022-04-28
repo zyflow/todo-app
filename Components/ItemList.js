@@ -1,13 +1,30 @@
-import {Button, FlatList, Text, TextInput, ToastAndroid, View} from "react-native";
-import {styles} from "../css/list";
-import React, {useEffect, useState} from "react";
+import { FlatList, Text, View} from "react-native";
+import {listStyles} from "../css/list";
+import React, { useState} from "react";
 
 export const ItemList = ({itemList}) => {
-    return     <FlatList
-        style={styles.item}
-        data={itemList}
-        renderItem={({item}) => <Text style={styles.item}>- {item}</Text>}
-        keyExtractor={(item,index) => index.toString()}
+    const Element = (item) => {
+        const [enabled, setEnabled] = useState(false);
 
+        let styleBlock = [listStyles.item]
+        if (enabled) {
+            styleBlock = [listStyles.item, listStyles.strikeout]
+        }
+
+        return <View>
+            <Text style={styleBlock} onPress={() => { setEnabled(!enabled)}}>
+                {item.item}
+            </Text>
+        </View>
+    }
+
+    const renderItem = ({ item }) => (
+        <Element  item={item} />
+    );
+
+    return <FlatList
+        data={itemList}
+        renderItem={renderItem}
+        keyExtractor={(item,index) => index.toString()}
     />
 }

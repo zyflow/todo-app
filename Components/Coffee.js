@@ -57,15 +57,14 @@ export const Coffee = () => {
 
 
     const renderItem = ({ item }) => (
-        <ItemBlockWithImage title={item.name} image={item.image} rating={item.rating}  />
+        <ItemBlockWithImage title={item.name} image={item.image} rating={item.rating} edit={false}  />
     );
 
     return     <View style={styles.body}>
         <View style={styles.container}>
-            <Text>Coffee page:</Text>
+            <Text style={styles.headerText}>Coffee page ({coffeeList.length})</Text>
 
             <FlatList
-                style={styles.item}
                 data={coffeeList}
                 renderItem={renderItem}
                 keyExtractor={(item,index) => index.toString()}

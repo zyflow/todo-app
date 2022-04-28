@@ -3,17 +3,26 @@ import { View, Text, Button } from 'react-native';
 import { styles } from '../css/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export function Footer({setCurrentScreen}) {
+export function Footer({currentScreen, setCurrentScreen}) {
 
     const stuff = (data) => {
-        console.log('... ??')
+        console.log('... ??', data)
         setCurrentScreen(data)
     }
 
+    const isActive = (data) => {
+
+        if (data === currentScreen) {
+            return styles.activeFooterItem
+        }
+
+        return styles.footerItem;
+    }
+
     return <View style={styles.footer}>
-        <Icon.Button size={30} onPress={() => stuff("home")}  backgroundColor="#616164"name="home" ></Icon.Button>
-        <Icon.Button size={30} onPress={() => stuff("calendar")}  backgroundColor="#616164" name="calendar" ></Icon.Button>
-        <Icon.Button size={30} onPress={() => stuff("coffee")}  backgroundColor="#616164" name="coffee" ></Icon.Button>
-        <Icon.Button size={30} onPress={() => stuff("beer")}  backgroundColor="#616164" name="beer" ></Icon.Button>
+        <Icon.Button style={isActive("home")}       size={30} onPress={() => stuff("home")}      name="home"  />
+        <Icon.Button style={isActive("calendar")}   size={30} onPress={() => stuff("calendar")}  name="calendar"  />
+        <Icon.Button style={isActive("coffee")}     size={30} onPress={() => stuff("coffee")}    name="coffee"  />
+        <Icon.Button style={isActive("beer")}       size={30} onPress={() => stuff("beer")}      name="beer"  />
     </View>
 }

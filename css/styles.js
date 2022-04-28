@@ -48,12 +48,14 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start"
   },
+
   item: {
     borderWidth: 1,
     height: 60,
     borderColor: 'black',
     margin: 10,
     borderRadius: 5,
+
   },
   headerText: {
     fontSize: 30,
@@ -70,6 +72,26 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-start",
     flex: 1,
+  },
+  listHeight: {
+    flex: 1,
+    flexDirection: "column",
+    // height: 90,
+    borderWidth: 1,
+    // backgroundColor: "red"
+  },
+  footerItem: {
+    paddingLeft: 15,
+    // marginLeft: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#616164"
+  },
+  activeFooterItem: {
+    paddingLeft: 15,
+    justifyContent: "center",
+    textAlign: "center",
+    backgroundColor: "#757579"
   }
 
 })
