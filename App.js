@@ -1,33 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, Button, FlatList, SafeAreaView, StyleSheet, TextInput, ToastAndroid } from 'react-native';
-import { styles } from './styles';
-import {Header} from "./Components/header";
-import {Weekly} from "./Components/weekly";
-import {Daily} from "./Components/daily";
-import {Ultimate} from "./Components/ultimate";
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { styles } from './css/styles';
+import {Footer} from "./Components/footer";
+import {Todos} from "./Components/Todos";
+import {Home} from "./Components/Home";
+import {Coffee} from "./Components/Coffee";
+import {Beer} from "./Components/Beer";
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('weekly');
-  let content = <Weekly/>
+  let content = <Coffee/>
 
   switch (currentScreen) {
-    case 'weekly':
-      content = <Weekly />
+    case 'home':
+      content = <Home/>
       break;
-    case 'daily':
-      content = <Daily />
+    case 'calendar':
+      content = <Todos />
       break;
-    case 'ultimate':
-      content = <Ultimate />
+    case 'coffee':
+      content = <Coffee />
+      break;
+    case 'beer':
+      content = <Beer />
       break;
   }
 
+
+
   console.log('currenty', currentScreen)
   return (
-      <View style={styles.body}>
-        <Header setCurrentScreen={setCurrentScreen} />
-
+      <View style={styles.mainBody}>
         {content}
+        <Footer setCurrentScreen={setCurrentScreen} />
       </View>
   );
 }

@@ -1,6 +1,7 @@
 import {Button, FlatList, Text, TextInput, ToastAndroid, View} from "react-native";
-import {styles} from "../styles";
+import {styles} from "../css/styles";
 import React, {useEffect, useState} from "react";
+import {ItemList} from "./ItemList";
 
 export const Weekly = () => {
     const [itemList, setList] = useState(['FIrst']);
@@ -34,29 +35,19 @@ export const Weekly = () => {
     }
 
 
-    const listItems = itemList.map((item) => {
-        return <Text> - {item}</Text>
-    })
-
-    console.log('data', Platform.OS)
-
     const showToast = () => {
         ToastAndroid.show("Item saved", ToastAndroid.SHORT);
     };
 
     return     <View style={styles.body}>
         <View style={styles.container}>
-            <Text> Weekly TODO:</Text>
-            <FlatList
-                style={styles.list}
-                data={itemList}
-                renderItem={({item}) => <Text style={styles.item}>- {item}</Text>}
-            />
+            <Text style={styles.headerText}> Weekly TODO:</Text>
+            <ItemList itemList={itemList} />
 
             <Text> Add new item </Text>
             <TextInput style={styles.input} value={number} onChangeText={updateText} />
         </View>
-        <View style={styles.footer}>
+        <View style={styles.layoutFooter}>
             <Button
                 style={styles.mainButton}
                 onPress={appendToList}

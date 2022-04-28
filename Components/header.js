@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
-import { styles } from '../styles';
+import { styles } from '../css/styles';
 
 export function Header({setCurrentScreen}) {
 
