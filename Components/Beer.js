@@ -1,9 +1,10 @@
-import {Button, FlatList, Text, TextInput, ToastAndroid, View, Modal, Pressable} from "react-native";
+import {Button, FlatList, Text, TextInput, ToastAndroid, View, Modal, Platform} from "react-native";
 import {styles} from "../css/styles";
 import {modalStyles} from "../css/modal";
 import React, {useEffect, useState} from "react";
 import {ItemBlockWithImage} from "./ItemBlockWithImage";
 import * as ImagePicker from 'expo-image-picker';
+import axios from "axios";
 
 export const Beer = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -40,14 +41,36 @@ export const Beer = () => {
         <ItemBlockWithImage title={item.name} image={item.image} rating={item.rating} edit={false}  />
     );
 
-    const save = () => {
+    const save = async () => {
+
+        console.log('do SAVE')
+        let headers =  {
+            Authorization: `Bearer: 123`,
+            "Content-Type": "application/json",
+        };
+
+        const data = {
+            name: "Upload1.jpeg",
+            image: " testing 123"
+        };
+
+        console.log('data...', data)
+        await axios.post('http://localhost:3000/save-image', data, headers).then(resp => {
+            console.log('what is resp ...', resp)
+        }).catch(e => {
+            console.log('what is err', e)
+        })
+        // const respo = await UploadImageToS3WithReactS3(image);
         beerList.push({
             name: name,
             rating: rating,
             image: image ? image : "https://www.spiritsandwine.lv/img/items/12/1278.jpeg",
         })
         setBeerList(beerList)
-        ToastAndroid.show("Item saved", ToastAndroid.SHORT)
+
+        if (Platform.OS === 'android') {
+            ToastAndroid.show("Item saved", ToastAndroid.SHORT)
+        }
         setModalVisible(false)
     }
 
@@ -61,10 +84,18 @@ export const Beer = () => {
             quality: 1,
         });
 
-        console.log(result);
+        console.log('pick image result ', result);
 
         if (!result.cancelled) {
-            setImage(result.uri);
+
+            if (Platform.OS === 'android') {
+                const contents = fs.readFileSync(result.uri, {encoding: 'base64'});
+                console.log('setting', contents)
+                setImage(contents);
+            } else {
+                console.log('setting', result.uri)
+                setImage(result.uri);
+            }
         }
     };
 

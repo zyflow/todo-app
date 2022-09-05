@@ -3,7 +3,7 @@ import {listStyles} from "../css/list";
 import React, { useState} from "react";
 
 export const ItemList = ({itemList}) => {
-    const Element = (item) => {
+    const Element = ({item}) => {
         const [enabled, setEnabled] = useState(false);
 
         let styleBlock = [listStyles.item]
@@ -13,18 +13,24 @@ export const ItemList = ({itemList}) => {
 
         return <View>
             <Text style={styleBlock} onPress={() => { setEnabled(!enabled)}}>
-                {item.item}
+                {item.block} {item.message}
             </Text>
         </View>
     }
 
-    const renderItem = ({ item }) => (
-        <Element  item={item} />
-    );
+    const renderItem = ({ item }) => {
 
-    return <FlatList
-        data={itemList}
-        renderItem={renderItem}
-        keyExtractor={(item,index) => index.toString()}
-    />
+        return (
+            <Element item={item}/>
+        );
+    };
+
+    return <>
+        {itemList.length > 0 ?
+        <FlatList
+            data={itemList}
+            renderItem={renderItem}
+            keyExtractor={(item,index) => index.toString()}
+        /> : <></>}
+    </>
 }

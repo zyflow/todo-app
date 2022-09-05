@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { styles } from './css/styles';
-import {Footer} from "./Components/footer";
-import {Todos} from "./Components/Todos";
+import {Footer} from "./Components/Footer";
 import {Home} from "./Components/Home";
 import {Coffee} from "./Components/Coffee";
 import {Beer} from "./Components/Beer";
@@ -15,9 +14,9 @@ function App() {
     case 'home':
       content = <Home/>
       break;
-    case 'calendar':
-      content = <Todos />
-      break;
+    // case 'calendar':
+    //   content = <Todos />
+    //   break;
     case 'coffee':
       content = <Coffee />
       break;

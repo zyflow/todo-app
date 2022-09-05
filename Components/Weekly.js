@@ -2,38 +2,53 @@ import {Button, FlatList, Text, TextInput, ToastAndroid, View, ActivityIndicator
 import {styles} from "../css/styles";
 import React, {useEffect, useState} from "react";
 import {ItemList} from "./ItemList";
+import axios from "axios";
 
-export const Weekly = () => {
-    const [itemList, setList] = useState(['FIrst']);
+export const Weekly = ({list}) => {
+    const [itemList, setList] = useState([]);
     const [number, onChangeNumber] = React.useState('Init');
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    const getList = async()=>{
-        try{
-            setLoading(true)
-            const response = await fetch('https://the-very-mine-todo-app.herokuapp.com/list');
-            const json = await response.json();
-            setData(json);
-            setList(json);
-            setLoading(false)
-        }catch(e){
-            console.log('ERROR',e)
-        }
-    }
 
     useEffect(() => {
-        getList();
-    }, []);
-
+        setList(list)
+    }, [list])
 
     const updateText = (e) => {
         onChangeNumber(e)
     }
 
-    const appendToList = () => {
-        setList([number,...itemList])
+    const appendToList = async () => {
+        // console.log('what number', number)
+        setList([{message: number, block: 'weekly'},...itemList])
         showToast();
+
+        try {
+            var data = JSON.stringify({
+                "block": "weekly",
+                "text": number
+            });
+
+            var config = {
+                method: 'post',
+                url: 'https://the-very-mine-todo-app.herokuapp.com/todo',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data : data
+            };
+
+            axios(config)
+                .then(function (response) {
+                    console.log('ir ok ', JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+
+        } catch (e) {
+            console.log('err', e)
+        }
+
     }
 
 
@@ -45,11 +60,10 @@ export const Weekly = () => {
         <View style={styles.container}>
             <Text style={styles.headerText}> Weekly TODO:</Text>
 
-            {loading ?
-                <ActivityIndicator size="large" color="#0000ff"/> :
+            {/*{loading ?*/}
+            {/*    <ActivityIndicator size="large" color="#0000ff"/> :*/}
                 <ItemList  itemList={itemList} />
-            }
-
+            {/*}*/}
             <Text> Add new item </Text>
             <TextInput style={styles.input} value={number} onChangeText={updateText} />
         </View>

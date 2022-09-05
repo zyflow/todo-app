@@ -1,18 +1,39 @@
 import {Text, TextInput, ToastAndroid, View} from "react-native";
 import {styles} from "../css/styles";
 import React, {useEffect, useState} from "react";
-import {Weekly} from "./weekly";
-import {Daily} from "./daily";
-import {Ultimate} from "./ultimate";
-import {Header} from "./header";
+import {Weekly} from "./Weekly";
+import {Daily} from "./Daily";
+import {Ultimate} from "./Ultimate";
+import {Header} from "./Header";
+import {ActivityIndicator} from "react-native-web";
 
 export const Todos = ({itemList}) => {
     const [currentScreen, setCurrentScreen] = useState('weekly');
+    const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const getList = async()=>{
+        try{
+            setLoading(true)
+            const response = await fetch('https://the-very-mine-todo-app.herokuapp.com/list');
+            const json = await response.json();
+            // console.log('ze json', json)
+            setList(json);
+            // setLoading(false)
+        }catch(e){
+            console.log('ERROR',e)
+        }
+    }
+
+    useEffect(() => {
+        getList();
+    }, []);
+
     let content = <Weekly/>
 
     switch (currentScreen) {
         case 'weekly':
-            content = <Weekly />
+            content = <Weekly list={list} />
             break;
         case 'daily':
             content = <Daily />
@@ -23,7 +44,13 @@ export const Todos = ({itemList}) => {
     }
 
     return   <View style={styles.body}>
-        <Header setCurrentScreen={setCurrentScreen} currentScreen={currentScreen} />
-        {content}
+        {loading === true ?
+            <ActivityIndicator /> :
+            <>
+                <Header setCurrentScreen={setCurrentScreen} currentScreen={currentScreen} />
+                {content}
+            </>
+        }
+
     </View>
 }
