@@ -1,0 +1,47 @@
+import React from 'react';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {HorizontalDatePicker} from "../HorizontalDatePicker";
+import {TimePicker} from "../TimePicker";
+
+export function WhenArrive({setCurrentStep, currentStep}) {
+
+    return <ScrollView>
+        <Text style={styles.title}>Kad mums ierasties</Text>
+        <HorizontalDatePicker />
+
+        <TimePicker />
+
+
+    </ScrollView>
+}
+
+
+export const styles = StyleSheet.create({
+    title: {
+      fontSize: 20,
+      fontWeight: "700"
+    },
+    button: {
+        width: 220,
+        backgroundColor: "#2669ba",
+        borderRadius: 5,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    footer: {
+        margin: 15,
+        padding: 10,
+        width: "95%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    priceTitle: {
+        color: "#8a8989",
+    },
+    price: {
+        fontWeight: "900",
+        fontSize: 15
+    }
+});

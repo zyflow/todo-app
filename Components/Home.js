@@ -1,19 +1,18 @@
-import {Button, FlatList, Text, TextInput, ToastAndroid, View, PanResponder} from "react-native";
+import {Text, View} from "react-native";
 import {styles} from "../css/styles";
-import React, {useEffect, useState} from "react";
+import React from "react";
+import {ServiceList} from "./ServiceList";
 
-export const Home = () => {
+export const Home = ({navigation}) => {
 
 
     return     <View style={styles.body} >
         <View style={styles.container}>
-            <Text style={styles.headerText}>Home page</Text>
+            <Text style={styles.headerText}>Kāds pakalpojums tev ir nepieciešams</Text>
+            <Text>Izvēlieties vēlamo pakalpojumu, un mēs jums piemeklēsim atbilstošu pakalpojumu sniedzēju</Text>
 
+            <ServiceList navigation={navigation}/>
 
-            <Text>This is overall first page</Text>
-            <Text>Second is calendar - todo list, with multiple sublists</Text>
-            <Text>Coffee icon is for coffee reviews and ratings</Text>
-            <Text>Beer icon is for coffee reviews and ratings</Text>
         </View>
 
     </View>

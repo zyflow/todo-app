@@ -5,29 +5,20 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     paddingTop: 60,
-    backgroundColor: "#aeaeae",
+    backgroundColor: "#ffffff",
   },
   body: {
     flex: 4,
     height: 50,
-    backgroundColor: "#efcae0",
-    // backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     flexDirection: "column",
   },
   container: {
-    backgroundColor: "#eaeaea",
+    backgroundColor: "#ffffff",
     flex: 1,
     padding: 20,
   },
-  footer: {
-    backgroundColor: "#616164",
-    height: 60,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingLeft: 20,
-    paddingRight: 20,
-    alignItems: "center"
-  },
+
   layoutFooter: {
     justifyContent: "center",
 
@@ -59,6 +50,7 @@ export const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 30,
+    fontWeight: "700",
   },
   headerBlock: {
     flexDirection: "row",
@@ -67,8 +59,10 @@ export const styles = StyleSheet.create({
   },
   formContainer: {
     flexDirection: "row",
+
   },
   inputContainer: {
+    color: "black",
     flexDirection: "column",
     justifyContent: "flex-start",
     flex: 1,
@@ -92,6 +86,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     backgroundColor: "#757579"
-  }
+  },
 
 })

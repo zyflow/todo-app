@@ -1,28 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Button } from 'react-native';
-import { styles } from '../css/styles';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {Button} from "react-native-paper";
 
-export function Footer({currentScreen, setCurrentScreen}) {
-
-    const stuff = (data) => {
-        console.log('... ??', data)
-        setCurrentScreen(data)
-    }
-
-    const isActive = (data) => {
-
-        if (data === currentScreen) {
-            return styles.activeFooterItem
-        }
-
-        return styles.footerItem;
-    }
+export function Footer({setCurrentStep, currentStep}) {
 
     return <View style={styles.footer}>
-        <Icon.Button style={isActive("home")}       size={30} onPress={() => stuff("home")}      name="home"  />
-        <Icon.Button style={isActive("calendar")}   size={30} onPress={() => stuff("calendar")}  name="calendar"  />
-        <Icon.Button style={isActive("coffee")}     size={30} onPress={() => stuff("coffee")}    name="coffee"  />
-        <Icon.Button style={isActive("beer")}       size={30} onPress={() => stuff("beer")}      name="beer"  />
+        <View>
+            <Text style={styles.priceTitle}>Paredzamā cena</Text>
+            <Text style={styles.price}>56.67E</Text>
+        </View>
+
+        <View >
+            <Button contentStyle={styles.button} style={styles.button}   mode="contained" onPress={() => setCurrentStep(currentStep + 1)}>
+                <Text>Press me</Text>
+            </Button>
+        </View>
     </View>
 }
+
+
+export const styles = StyleSheet.create({
+    button: {
+        width: 220,
+        backgroundColor: "#2669ba",
+        borderRadius: 5,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    footer: {
+        margin: 15,
+        padding: 10,
+        width: "95%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    priceTitle: {
+        color: "#8a8989",
+    },
+    price: {
+        fontWeight: "900",
+        fontSize: 15
+    }
+});

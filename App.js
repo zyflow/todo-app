@@ -1,37 +1,24 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
-import { styles } from './css/styles';
-import {Footer} from "./Components/Footer";
+import React  from 'react';
 import {Home} from "./Components/Home";
-import {Coffee} from "./Components/Coffee";
-import {Beer} from "./Components/Beer";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {ServiceView} from "./Components/ServiceView";
+import { Provider as PaperProvider } from 'react-native-paper';
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState('calendar');
-  let content = <Coffee/>
-
-  switch (currentScreen) {
-    case 'home':
-      content = <Home/>
-      break;
-    // case 'calendar':
-    //   content = <Todos />
-    //   break;
-    case 'coffee':
-      content = <Coffee />
-      break;
-    case 'beer':
-      content = <Beer />
-      break;
-  }
-
-
+  const Stack = createNativeStackNavigator();
 
   return (
-      <View style={styles.mainBody}>
-        {content}
-        <Footer currentScreen={currentScreen} setCurrentScreen={setCurrentScreen} />
-      </View>
+      <PaperProvider>
+          <NavigationContainer>
+              <Stack.Navigator  initialRouteName="Home">
+                  <Stack.Screen name="Home" component={Home} />
+                  <Stack.Screen name="Item" component={ServiceView} options={({ route }) => {
+                      return ({title: route.params.title});
+                  }} />
+              </Stack.Navigator>
+          </NavigationContainer>
+      </PaperProvider>
   );
 }
 
