@@ -16,7 +16,7 @@ export const HorizontalDatePicker = () => {
         const currDate = moment().add(i, 'days');
 
         dates.push(
-            <View style={styles.dateBlock}>
+            <View key={i} style={styles.dateBlock}>
                 <TouchableWithoutFeedback onPress={(e) => toggle(e, i)} style={styles.center}>
                     <View style={[styles.date, styles.center, i === selected ? styles.selected : '']} >
                         <Text >

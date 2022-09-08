@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {StyleSheet, View, Text} from "react-native";
+import {StyleSheet, View, Text, TouchableWithoutFeedback} from "react-native";
 import {RadioButton} from 'react-native-paper';
 
 export const InputSingleRadioButton = ({option}) => {
@@ -10,19 +10,22 @@ export const InputSingleRadioButton = ({option}) => {
         setChecked(!checked)
     }
 
-    return <View style={styles.block} >
-        <View style={styles.titleBlock}>
-            <Text style={styles.title}>{option} {checked}</Text>
-        </View>
-        <View >
-            <RadioButton
-                value={option}
-                status={checked ? 'checked' : 'uncheked'}
-                onPress={() => setChecked(!checked)}
-            />
-        </View>
+    return <TouchableWithoutFeedback onPress={() => setChecked(!checked)}>
+        <View style={styles.block} >
+            <View style={styles.titleBlock}>
+                <Text style={styles.title}>{option} {checked}</Text>
+            </View>
+            <View >
+                <RadioButton
+                    value={option}
+                    status={checked ? 'checked' : 'uncheked'}
+                    onPress={() => setChecked(!checked)}
+                />
+            </View>
 
-    </View>
+        </View>
+    </TouchableWithoutFeedback>
+
 }
 
 

@@ -1,15 +1,42 @@
 import React, {useState} from "react";
-import {StyleSheet, TextInput, View, Text} from "react-native";
+import {StyleSheet, View, Text} from "react-native";
+import {IconButton} from "react-native-paper";
 
 export const InputStepCount = () => {
 
-    const [text, setText] = useState('');
+    const [count, setCount] = useState(0);
+
+    const decreaseCount = () => {
+        if (count >= 1) {
+            setCount(count - 1);
+        }
+    }
+
+    const increaseCount = () => {
+        setCount(count + 1);
+    }
 
     return <View style={styles.block}>
         <View style={styles.startLabel}>
             <Text style={styles.startLabelText}> Istabu skaits</Text>
         </View>
         <View style={styles.endPartBlock}>
+            <IconButton
+                icon="minus-circle"
+                iconColor="#ccc"
+                size={20}
+                onPress={() => decreaseCount()}
+            />
+
+            <View style={styles.midNumberContainer}>
+                <Text style={styles.midNumberText}>{count}</Text>
+            </View>
+            <IconButton
+                icon="plus-circle"
+                iconColor="#ccc"
+                size={20}
+                onPress={() => increaseCount()}
+            />
         </View>
 
 
@@ -45,13 +72,17 @@ export const styles = StyleSheet.create({
         maxWidth: 120,
         fontWeight: "700",
         color: "black",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-        fontSize: 17,
+        justifyContent: "space-around",
+        flexDirection: "row",
         width: "25%",
-        borderTopRightRadius: 10,
-        borderBottomRightRadius: 10,
     },
+    midNumberContainer: {
+        alignItems: "center",
+        justifyContent: "center",
 
+    },
+    midNumberText: {
+        fontSize: 17,
+        fontWeight: "500",
+    }
 });

@@ -15,7 +15,7 @@ export const TimePicker = () => {
     for (let i = 8; i < 18; i++) {
 
         dates.push(
-            <View style={styles.dateBlock}>
+            <View key={i} style={styles.dateBlock}>
                 <TouchableWithoutFeedback onPress={(e) => toggle(e, i)} style={styles.center}>
                     <View style={[styles.date, styles.center, i === selected ? styles.selected : '']} >
                         <Text >
