@@ -7,6 +7,8 @@ import {InputRadioGroup} from "./InputRadioGroup";
 import {Platform} from "react-native";
 import {ProgressBar} from "react-native-paper";
 import {WhenArrive} from "./Steps/WhenArrive";
+import {PictureBlock} from "./Steps/PIctureBlock";
+import {AddressBlock} from "./Steps/AddressBlock";
 
 export const ServiceView = ({route, navigation}) => {
     const {itemId, item} = route.params;
@@ -29,8 +31,10 @@ export const ServiceView = ({route, navigation}) => {
     </ScrollView>
 
     const step4 = <WhenArrive />
+    const step5 = <PictureBlock navigation={navigation}/>
+    // const step6 = <AddressBlock navigation={navigation}/>
 
-    const stepContainer = [step1, step2, step3, step4]
+    const stepContainer = [ step6 ]
 
 
     return <SafeAreaView style={inlineStyle.test}>
@@ -60,12 +64,8 @@ export const inlineStyle = StyleSheet.create({
         justifyContent: "space-between",
         flexDirection: "column",
         flex: 1,
-
-
     },
     padding: {
         padding: 400
     }
-
-
 });
