@@ -32,9 +32,9 @@ export const ServiceView = ({route, navigation}) => {
 
     const step4 = <WhenArrive />
     const step5 = <PictureBlock navigation={navigation}/>
-    // const step6 = <AddressBlock navigation={navigation}/>
+    const step6 = <AddressBlock navigation={navigation}/>
 
-    const stepContainer = [ step6 ]
+    const stepContainer = [ step1, step6 ]
 
 
     return <SafeAreaView style={inlineStyle.test}>
