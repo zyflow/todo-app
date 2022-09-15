@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Button,
   View,
   Text,
   StyleSheet,
@@ -8,17 +7,25 @@ import {
   Dimensions,
   TextInput,
 } from "react-native";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { InputBlock } from "../InputBlock";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export function AddressBlock({ navigation }) {
+  console.log("all good?");
   return (
     <ScrollView>
       <Text style={styles.title}>Kāda ir tava adrese?</Text>
 
       <View style={styles.container}>
-        <MapView style={styles.map} />
+        <MapView style={styles.map}>
+          <Marker
+            coordinate={{ latitude: 56.9354343, longitude: 24.1342781 }}
+            pinColor={"purple"} // any color
+            title={"title"}
+            description={"description"}
+          />
+        </MapView>
       </View>
 
       <InputBlock
