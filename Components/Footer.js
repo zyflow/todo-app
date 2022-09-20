@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
+import { PricingContext } from "./ServiceView";
 
 export function Footer({ setCurrentStep, currentStep }) {
+  const data = useContext(PricingContext);
+
+  console.log("footer", data);
+  console.log("footer items", data.items);
+
   return (
     <View style={styles.footer}>
       <View>
         <Text style={styles.priceTitle}>Paredzamā cena</Text>
-        <Text style={styles.price}>56.67E</Text>
+        <Text style={styles.price}>{data.price} E</Text>
       </View>
 
       <View>

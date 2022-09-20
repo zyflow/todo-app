@@ -1,18 +1,25 @@
-import React from "react";
-import {StyleSheet, View} from "react-native";
-import {InputSingleRadioButton} from "./InputSingleRadioButton";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { InputSingleRadioButton } from "./InputSingleRadioButton";
 
-export const InputRadioGroup = ({options}) => {
-       const radioButtons = options.map((option, key) => {
-           return <InputSingleRadioButton key={key} option={option} />
-       })
+export const InputRadioGroup = ({ options, setResult }) => {
+  const flagOption = () => {
+    console.log("radio clicked");
+    // setResult();
+  };
 
-    return   <View  >
-        {radioButtons}
-    </View>
-}
+  const radioButtons = options.map((option, key) => {
+    return (
+      <InputSingleRadioButton
+        key={key}
+        option={option}
+        onClick={(e) => flagOption()}
+        onChange={(e) => flagOption()}
+      />
+    );
+  });
 
+  return <View>{radioButtons}</View>;
+};
 
-export const styles = StyleSheet.create({
-
-});
+export const styles = StyleSheet.create({});

@@ -3,11 +3,13 @@ import { StyleSheet, TextInput, View, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 export const InputBlock = ({
+  setInputValue,
   position = "end",
   icon = null,
   placeholder = null,
 }) => {
   const [text, setText] = useState();
+  setInputValue(text);
 
   return (
     <View style={styles.block}>

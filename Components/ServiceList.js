@@ -8,6 +8,9 @@ export const ServiceList = ({ navigation }) => {
     {
       img: "https://www.bhg.com.au/media/21117/cleaner.jpg?width=720&center=0.0,0.0",
       name: "Standarta uzkopšana",
+      data: {
+        steps: ["RoomSize", "PictureBlock", "AddressBlock"],
+      },
     },
     {
       img: "https://www.greenassex.com/wp-content/uploads/2021/10/maid.jpg",
