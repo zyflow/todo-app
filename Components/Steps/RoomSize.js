@@ -1,27 +1,36 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import { InputBlock } from "../InputBlock";
 import { InputStepCount } from "../InputStepCount";
 import { InputRadioGroup } from "../InputRadioGroup";
-import { PricingContext } from "../ServiceView";
+import { StepInfoContext } from "../../Contexts/StepInfoProvider";
 
-export function RoomSize() {
+export function RoomSize({ stepValues, setStepValues }) {
   const [stepCountResult, setStepCountResult] = useState(0);
-  const data = useContext(PricingContext);
+  const [inputValue, setInputValue] = useState(0);
 
-  // const updatePrice = (cost) => {
-  //   data.setPrice(data.price + cost);
+  const { setSteps, steps, currentStep } = useContext(StepInfoContext);
+
+  // const updateStepValues = () => {
+  //   if (inputValue > 3) {
+  //     setStepValues(...stepValues, { roomSize: 5 });
+  //   }
   // };
 
-  let res = stepCountResult * 5;
-  data.setPrice(res);
-  // data.setItems({
-  //   step1: {
-  //     roomCount: stepCountResult,
-  //   },
-  // });
+  useEffect(() => {
+    setStepValues({
+      roomCount: inputValue,
+      roomSize: stepCountResult,
+    });
 
-  const [inputValue, setInputValue] = useState();
+    setSteps({
+      ...steps,
+      [currentStep]: {
+        roomSizeM2: inputValue,
+        roomCount: stepCountResult,
+      },
+    });
+  }, [inputValue, stepCountResult]);
 
   return (
     <ScrollView>

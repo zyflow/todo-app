@@ -9,7 +9,12 @@ export const InputBlock = ({
   placeholder = null,
 }) => {
   const [text, setText] = useState();
-  setInputValue(text);
+  // setInputValue(333);
+
+  const updateFields = (e) => {
+    setText(e);
+    setInputValue(e);
+  };
 
   return (
     <View style={styles.block}>
@@ -20,12 +25,14 @@ export const InputBlock = ({
           </Text>
         </View>
       ) : null}
+      <Text>??</Text>
       <TextInput
-        keyboardType="phone-pad"
+        keyboardType="numeric"
         style={styles.input}
         value={text}
         placeholder={placeholder ? placeholder : ""}
-        onChange={(e) => setText(e.target.value)}
+        // onChange={(e) => updateFields(e)}
+        onChangeText={(e) => updateFields(e)}
       />
       {position === "end" ? (
         <View style={styles.endPartBlock}>

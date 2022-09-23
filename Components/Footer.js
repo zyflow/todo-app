@@ -1,19 +1,38 @@
 import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
-import { PricingContext } from "./ServiceView";
+import { StepInfoContext } from "../Contexts/StepInfoProvider";
 
-export function Footer({ setCurrentStep, currentStep }) {
-  const data = useContext(PricingContext);
+export function Footer({ navigation, route, stepValues = {} }) {
+  const { currentStep, setCurrentStep, serviceListData, steps } =
+    useContext(StepInfoContext);
 
-  console.log("footer", data);
-  console.log("footer items", data.items);
+  const currentIndex = serviceListData.indexOf(currentStep);
+  const total = route.params.total ?? 0;
+
+  const nextStep = () => {
+    console.log("current steps", steps);
+
+    const newStep = serviceListData[currentIndex + 1];
+    if (typeof newStep === "undefined" || typeof newStep === undefined) {
+      navigation.navigate("ServiceList", {});
+    } else {
+      setCurrentStep(newStep);
+      navigation.navigate(newStep + "Container", {
+        itemId: 86,
+        currentStep,
+        nextStep: 2,
+        total: 123,
+        stepValues,
+      });
+    }
+  };
 
   return (
     <View style={styles.footer}>
       <View>
-        <Text style={styles.priceTitle}>Paredzamā cena</Text>
-        <Text style={styles.price}>{data.price} E</Text>
+        <Text style={styles.priceTitle}>Paredzamā cena ...</Text>
+        <Text style={styles.price}>{total} E</Text>
       </View>
 
       <View>
@@ -21,7 +40,7 @@ export function Footer({ setCurrentStep, currentStep }) {
           contentStyle={styles.button}
           style={styles.button}
           mode="contained"
-          onPress={() => setCurrentStep(currentStep + 1)}
+          onPress={() => nextStep()}
         >
           <Text>Next</Text>
         </Button>

@@ -1,14 +1,12 @@
-import { StyleSheet, KeyboardAvoidingView, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  KeyboardAvoidingView,
+  SafeAreaView,
+  Text,
+} from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
-import { Footer } from "./Footer";
+// import { Footer } from "./Footer";
 import { Platform } from "react-native";
-import { ProgressBar } from "react-native-paper";
-import { WhenArrive } from "./Steps/WhenArrive";
-import { PictureBlock } from "./Steps/PIctureBlock";
-import { AddressBlock } from "./Steps/AddressBlock";
-import { RoomSize } from "./Steps/RoomSize";
-import { Step3 } from "./Steps/Step3";
-import { Step2 } from "./Steps/Step2";
 
 export const PricingContext = React.createContext({
   price: 0,
@@ -22,16 +20,6 @@ export const ServiceView = ({ route, navigation }) => {
   const [price, setPrice] = useState(0);
   const [items, setItems] = useState({});
 
-  let stepContainer = [];
-  const step1 = <RoomSize />;
-  const step2 = <Step2 />;
-  const step3 = <Step3 />;
-
-  const step4 = <WhenArrive />;
-  const step5 = <PictureBlock navigation={navigation} />;
-  const step6 = <AddressBlock navigation={navigation} />;
-  stepContainer = [step1, step2, step3, step4, step5, step6];
-
   // memoize the full context value
   const contextValue = useMemo(
     () => ({
@@ -44,23 +32,28 @@ export const ServiceView = ({ route, navigation }) => {
   );
 
   return (
-    <PricingContext.Provider value={contextValue}>
-      <SafeAreaView style={inlineStyle.test}>
-        <ProgressBar
-          progress={(currentStep + 1) / stepContainer.length}
-          color={"#2a7dca"}
-        />
-        <KeyboardAvoidingView
-          style={inlineStyle.container}
-          keyboardVerticalOffset={-900}
-          behavior={Platform.OS === "ios" ? "padding" : null}
-        >
-          {stepContainer ? stepContainer[currentStep] : ""}
+    <SafeAreaView style={inlineStyle.test}>
+      <Text>SERVICE VIEW</Text>
+      {/*<ProgressBar*/}
+      {/*  progress={(currentStep + 1) / stepContainer.length}*/}
+      {/*  color={"#2a7dca"}*/}
+      {/*/>*/}
+      <KeyboardAvoidingView
+        style={inlineStyle.container}
+        keyboardVerticalOffset={-900}
+        behavior={Platform.OS === "ios" ? "padding" : null}
+      >
+        {/*{stepContainer ? stepContainer[currentStep] : ""}*/}
 
-          <Footer setCurrentStep={setCurrentStep} currentStep={currentStep} />
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    </PricingContext.Provider>
+        {/*<RoomSize navigation={navigation} />*/}
+        {/*<Footer*/}
+        {/*  route={route}*/}
+        {/*  setCurrentStep={setCurrentStep}*/}
+        {/*  currentStep={currentStep}*/}
+        {/*  navigation={navigation}*/}
+        {/*/>*/}
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 

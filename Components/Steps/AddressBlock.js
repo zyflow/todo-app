@@ -12,7 +12,6 @@ import { InputBlock } from "../InputBlock";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export function AddressBlock({ navigation }) {
-  console.log("all good?");
   return (
     <ScrollView>
       <Text style={styles.title}>Kāda ir tava adrese?</Text>
