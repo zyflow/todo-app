@@ -23,11 +23,11 @@ function App() {
       housingType: "apartment",
     },
     AddressBlock: {
-      address: "Street 1",
+      address: "",
     },
     WhenArriveBlock: {
-      date: "02-02-2022",
-      time: "09:00",
+      date: "",
+      time: "",
     },
   });
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,22 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import { InputBlock } from "../InputBlock";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { StepInfoContext } from "../../Contexts/StepInfoProvider";
 
-export function AddressBlock({ navigation }) {
+export function AddressBlock({ setAddress }) {
+  const { setSteps, steps, currentStep } = useContext(StepInfoContext);
+
+  const updateAddress = (data) => {
+    setAddress(data);
+
+    setSteps({
+      ...steps,
+      [currentStep]: {
+        adderss: data,
+      },
+    });
+  };
+
   return (
     <ScrollView>
       <Text style={styles.title}>Kāda ir tava adrese?</Text>
@@ -31,6 +45,7 @@ export function AddressBlock({ navigation }) {
         position={"start"}
         icon={"search1"}
         placeholder={"Meklēt vietu vai adresi"}
+        setInputValue={updateAddress}
       />
       <View style={styles.iconBlockContainer}>
         <View style={styles.iconBlock}>

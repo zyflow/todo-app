@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, StyleSheet, ScrollView } from "react-native";
 import { HorizontalDatePicker } from "../HorizontalDatePicker";
 import { TimePicker } from "../TimePicker";
 
-export function WhenArrive() {
+export function WhenArrive({ setDate, setTime }) {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Kad mums ierasties</Text>
-      <HorizontalDatePicker />
-
-      <TimePicker />
+      <HorizontalDatePicker setDate={setDate} />
+      <TimePicker setTime={setTime} />
     </ScrollView>
   );
 }

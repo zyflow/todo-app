@@ -1,17 +1,15 @@
 import React, { useContext, useState } from "react";
 import { Text, StyleSheet, ScrollView } from "react-native";
+import { styles } from "../../css/styles";
 
 import { RoomSize } from "./RoomSize";
 import { Footer } from "../Footer";
-import { StepInfoContext } from "../../Contexts/StepInfoProvider";
 
 export function RoomSizeContainer({ route, navigation, items }) {
   const [stepValues, setStepValues] = useState({});
 
-  const stuff = useContext(StepInfoContext);
-
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <Text>Room size container</Text>
       <RoomSize
         navigation={navigation}
@@ -27,4 +25,9 @@ export function RoomSizeContainer({ route, navigation, items }) {
   );
 }
 
-export const styles = StyleSheet.create({});
+// export const styles = StyleSheet.create({
+//   container: {
+//     padding: 10,
+//     backgroundColor: "#fff",
+//   },
+// });

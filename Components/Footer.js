@@ -1,21 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import { StepInfoContext } from "../Contexts/StepInfoProvider";
+import { postData } from "../Services/DataService";
 
 export function Footer({ navigation, route, stepValues = {} }) {
-  const { currentStep, setCurrentStep, serviceListData, steps } =
+  const { setCurrentStep, serviceListData, steps } =
     useContext(StepInfoContext);
 
+  let currentStep = "RoomSize";
+  if (route.name) {
+    currentStep = route.name.replace("Container", "");
+  }
   const currentIndex = serviceListData.indexOf(currentStep);
   const total = route.params.total ?? 0;
 
-  const nextStep = () => {
-    console.log("current steps", steps);
-
+  const nextStep = async () => {
     const newStep = serviceListData[currentIndex + 1];
+
     if (typeof newStep === "undefined" || typeof newStep === undefined) {
-      navigation.navigate("ServiceList", {});
+      // console.log("as last step then post", steps);
+      const resp = await postData(steps);
+      // console.log("resp", resp);
+      // navigation.navigate("ServiceList", {});
     } else {
       setCurrentStep(newStep);
       navigation.navigate(newStep + "Container", {
@@ -26,6 +33,10 @@ export function Footer({ navigation, route, stepValues = {} }) {
         stepValues,
       });
     }
+  };
+
+  const home = () => {
+    navigation.navigate("ServiceList", {});
   };
 
   return (
@@ -43,6 +54,16 @@ export function Footer({ navigation, route, stepValues = {} }) {
           onPress={() => nextStep()}
         >
           <Text>Next</Text>
+        </Button>
+      </View>
+
+      <View>
+        <Button
+          contentStyle={styles.button}
+          mode="contained"
+          onPress={() => home()}
+        >
+          <Text>Home</Text>
         </Button>
       </View>
     </View>

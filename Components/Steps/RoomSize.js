@@ -9,6 +9,7 @@ export function RoomSize({ stepValues, setStepValues }) {
   const [stepCountResult, setStepCountResult] = useState(0);
   const [inputValue, setInputValue] = useState(0);
 
+  const [houseType, setHouseType] = useState("Māja");
   const { setSteps, steps, currentStep } = useContext(StepInfoContext);
 
   // const updateStepValues = () => {
@@ -36,7 +37,10 @@ export function RoomSize({ stepValues, setStepValues }) {
     <ScrollView>
       <InputBlock inputValue={inputValue} setInputValue={setInputValue} />
       <InputStepCount setStepCountResult={setStepCountResult} />
-      <InputRadioGroup options={["Māja", "Dzīvoklis", "Viesu māja"]} />
+      <InputRadioGroup
+        setHouseType={setHouseType}
+        options={["Māja", "Dzīvoklis", "Viesu māja"]}
+      />
     </ScrollView>
   );
 }

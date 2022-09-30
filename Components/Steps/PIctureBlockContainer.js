@@ -3,6 +3,7 @@ import { Text, StyleSheet, ScrollView } from "react-native";
 import { PictureBlock } from "./PIctureBlock";
 import { Footer } from "../Footer";
 import { StepInfoContext } from "../../Contexts/StepInfoProvider";
+import { styles } from "../../css/styles";
 
 export function PictureBlockContainer({ route, navigation, items }) {
   const [pictureUrl, setPictureUrl] = useState("");
@@ -12,7 +13,7 @@ export function PictureBlockContainer({ route, navigation, items }) {
   }, [pictureUrl]);
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <Text>Picture block container</Text>
 
       <PictureBlock navigation={navigation} setPictureUrl={setPictureUrl} />
@@ -20,5 +21,3 @@ export function PictureBlockContainer({ route, navigation, items }) {
     </ScrollView>
   );
 }
-
-export const styles = StyleSheet.create({});
