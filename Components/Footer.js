@@ -8,6 +8,7 @@ export function Footer({ navigation, route, stepValues = {} }) {
   const { setCurrentStep, serviceListData, steps } =
     useContext(StepInfoContext);
 
+  // console.log("steps", steps.totalPrice);
   let currentStep = "RoomSize";
   if (route.name) {
     currentStep = route.name.replace("Container", "");
@@ -43,7 +44,7 @@ export function Footer({ navigation, route, stepValues = {} }) {
     <View style={styles.footer}>
       <View>
         <Text style={styles.priceTitle}>Paredzamā cena ...</Text>
-        <Text style={styles.price}>{total} E</Text>
+        <Text style={styles.price}>{steps.totalPrice} E</Text>
       </View>
 
       <View>

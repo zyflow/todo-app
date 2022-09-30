@@ -7,13 +7,34 @@ export const InputBlock = ({
   position = "end",
   icon = null,
   placeholder = null,
+  numeric = false,
 }) => {
   const [text, setText] = useState();
   // setInputValue(333);
 
   const updateFields = (e) => {
-    setText(e);
-    setInputValue(e);
+    if (numeric) {
+      const newText = checkForNumbersOnly(e);
+      // console.log("new", newText);
+      setText(newText);
+      setInputValue(newText);
+    } else {
+      setText(e);
+      setInputValue(e);
+    }
+  };
+
+  const checkForNumbersOnly = (text) => {
+    let newText = "";
+    let numbers = "0123456789";
+
+    for (var i = 0; i < text.length; i++) {
+      if (numbers.indexOf(text[i]) > -1) {
+        newText = newText + text[i];
+      }
+    }
+
+    return newText.substring(0, 10);
   };
 
   return (
@@ -25,9 +46,9 @@ export const InputBlock = ({
           </Text>
         </View>
       ) : null}
-      <Text>??</Text>
       <TextInput
-        keyboardType="numeric"
+        numeric
+        keyboardType={"numeric"}
         style={styles.input}
         value={text}
         placeholder={placeholder ? placeholder : ""}

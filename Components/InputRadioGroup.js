@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { InputSingleRadioButton } from "./InputSingleRadioButton";
 
 export const InputRadioGroup = ({ options, setHouseType }) => {
-  const flagOption = () => {
-    console.log("radio clicked");
-    // setResult();
-  };
+  const [currSelected, setCurrSelected] = useState();
+
+  useEffect(() => {
+    setHouseType(currSelected);
+  }, [currSelected]);
 
   const radioButtons = options.map((option, key) => {
     return (
       <InputSingleRadioButton
+        setCurrSelected={setCurrSelected}
+        currSelected={currSelected}
         setHouseType={setHouseType}
         key={key}
         option={option}

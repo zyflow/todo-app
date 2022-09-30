@@ -8,15 +8,12 @@ import { StepInfoContext } from "../../Contexts/StepInfoProvider";
 export function RoomSize({ stepValues, setStepValues }) {
   const [stepCountResult, setStepCountResult] = useState(0);
   const [inputValue, setInputValue] = useState(0);
+  const pricePerm2 = 1;
+  const pricePerRoom = 10;
 
   const [houseType, setHouseType] = useState("Māja");
   const { setSteps, steps, currentStep } = useContext(StepInfoContext);
-
-  // const updateStepValues = () => {
-  //   if (inputValue > 3) {
-  //     setStepValues(...stepValues, { roomSize: 5 });
-  //   }
-  // };
+  // const [price, setPrice] = useState(0);
 
   useEffect(() => {
     setStepValues({
@@ -24,18 +21,34 @@ export function RoomSize({ stepValues, setStepValues }) {
       roomSize: stepCountResult,
     });
 
+    let totalPrice = 0;
+    if (inputValue) {
+      totalPrice = pricePerm2 * inputValue;
+    }
+
+    if (stepCountResult) {
+      totalPrice += stepCountResult * pricePerRoom;
+    }
+    // console.log(inputValue, stepCountResult);
+
     setSteps({
       ...steps,
       [currentStep]: {
         roomSizeM2: inputValue,
         roomCount: stepCountResult,
+        houseType: houseType,
       },
+      totalPrice: totalPrice,
     });
   }, [inputValue, stepCountResult]);
 
   return (
     <ScrollView>
-      <InputBlock inputValue={inputValue} setInputValue={setInputValue} />
+      <InputBlock
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        numeric={true}
+      />
       <InputStepCount setStepCountResult={setStepCountResult} />
       <InputRadioGroup
         setHouseType={setHouseType}

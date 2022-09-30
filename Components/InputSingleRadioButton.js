@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
 import { RadioButton } from "react-native-paper";
 
-export const InputSingleRadioButton = ({ option, setHouseType }) => {
+export const InputSingleRadioButton = ({
+  option,
+  currSelected,
+  setCurrSelected,
+}) => {
   const [checked, setChecked] = useState(false);
 
   const doSelect = () => {
-    console.log("selection");
     setChecked(!checked);
-    setHouseType(checked);
+    setCurrSelected(option);
+    // setHouseType(checked);
   };
+
+  useEffect(() => {
+    if (currSelected !== option) {
+      setChecked(false);
+    }
+  }, [currSelected]);
 
   return (
     <TouchableWithoutFeedback onPress={() => setChecked(!checked)}>
@@ -23,7 +33,7 @@ export const InputSingleRadioButton = ({ option, setHouseType }) => {
           <RadioButton
             value={option}
             status={checked ? "checked" : "uncheked"}
-            onPress={() => setChecked(!checked)}
+            onPress={() => doSelect()}
           />
         </View>
       </View>
