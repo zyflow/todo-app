@@ -12,9 +12,14 @@ import { InputBlock } from "../InputBlock";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { StepInfoContext } from "../../Contexts/StepInfoProvider";
 
-export function AddressBlock({ setAddress }) {
+export function AddressBlock({
+  setAddress,
+  currentLocation,
+  setCurrentLocation,
+}) {
   const { setSteps, steps, currentStep } = useContext(StepInfoContext);
 
+  const [currLoc, setCurrLoc] = useState(currentLocation);
   const updateAddress = (data) => {
     setAddress(data);
 
@@ -26,17 +31,45 @@ export function AddressBlock({ setAddress }) {
     });
   };
 
+  const initState = {
+    ...currentLocation,
+    latitudeDelta: 0.0122,
+    longitudeDelta: 0.0421,
+  };
+
+  const getInitialState = () => {
+    return initState;
+  };
+
+  const onRegionChange = (region) => {
+    // console.log("ze rtegion", region);
+    return getInitialState();
+  };
+
+  const updateMarker = (e) => {
+
+    setCurrLoc({
+      latitude: e.nativeEvent.coordinate.latitude,
+      longitude: e.nativeEvent.coordinate.longitude,
+    });
+    return e.nativeEvent.coordinate;
+  };
+
   return (
     <ScrollView>
       <Text style={styles.title}>Kāda ir tava adrese?</Text>
 
       <View style={styles.container}>
-        <MapView style={styles.map}>
+        <MapView
+          style={styles.map}
+          initialRegion={initState}
+          // onRegionChange={(region) => onRegionChange(region)}
+        >
           <Marker
-            coordinate={{ latitude: 56.9354343, longitude: 24.1342781 }}
-            pinColor={"purple"} // any color
-            title={"title"}
-            description={"description"}
+            draggable
+            pinColor={"red"} // any color
+            coordinate={currentLocation}
+            onDragEnd={(e) => updateMarker(e)}
           />
         </MapView>
       </View>
@@ -54,6 +87,9 @@ export function AddressBlock({ setAddress }) {
         <View style={styles.iconBlockText}>
           <Text>Pašreizējā atrašanās vieta</Text>
           <Text>Aitonovas iela 20, Zemgales priekš</Text>
+          <Text>
+            {currLoc.latitude} {currLoc.longitude}
+          </Text>
         </View>
       </View>
     </ScrollView>

@@ -11,6 +11,7 @@ import { AddressBlockContainer } from "./Components/Steps/AddressBlockContainer"
 import { WhenArrive } from "./Components/Steps/WhenArrive";
 import { WhenArriveContainer } from "./Components/Steps/WhenArriveContainer";
 import { StepInfoContext } from "./Contexts/StepInfoProvider";
+import { SuccessContainer } from "./Components/Steps/SuccessContainer";
 
 function App() {
   const Stack = createNativeStackNavigator();
@@ -36,6 +37,7 @@ function App() {
     "PictureBlock",
     "AddressBlock",
     "WhenArrive",
+    "Success",
   ];
   const contextValue = useMemo(
     () => ({
@@ -88,6 +90,14 @@ function App() {
             <Stack.Screen
               name="WhenArriveContainer"
               component={WhenArriveContainer}
+              options={({ route }) => {
+                return { title: route.params.title };
+              }}
+            />
+
+            <Stack.Screen
+              name="SuccessContainer"
+              component={SuccessContainer}
               options={({ route }) => {
                 return { title: route.params.title };
               }}

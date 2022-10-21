@@ -20,10 +20,7 @@ export function Footer({ navigation, route, stepValues = {} }) {
     const newStep = serviceListData[currentIndex + 1];
 
     if (typeof newStep === "undefined" || typeof newStep === undefined) {
-      // console.log("as last step then post", steps);
       const resp = await postData(steps);
-      // console.log("resp", resp);
-      // navigation.navigate("ServiceList", {});
     } else {
       setCurrentStep(newStep);
       navigation.navigate(newStep + "Container", {

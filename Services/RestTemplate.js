@@ -1,3 +1,7 @@
+const url =
+  process.env.REACT_APP_URL ??
+  "https://mysterious-brushlands-71958.herokuapp.com";
+
 export async function post(method, body, token, skipContentType) {
   let tokens = localStorage.getItem("token");
 
@@ -9,7 +13,7 @@ export async function post(method, body, token, skipContentType) {
     basicHead["Content-Type"] = "application/json";
   }
 
-  const pageRes = await fetch("saubram-backend.test/api/data" + method, {
+  const pageRes = await fetch(url + method, {
     method: "post",
     headers: basicHead,
     body: body,
@@ -29,7 +33,7 @@ export async function put(method, body, token, skipContentType) {
     basicHead["Content-Type"] = "application/json";
   }
 
-  const pageRes = await fetch("saubram-backend.test/api/data" + method, {
+  const pageRes = await fetch(url + "/api/data" + method, {
     method: "put",
     headers: basicHead,
     body: body,
